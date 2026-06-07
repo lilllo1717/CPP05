@@ -1,0 +1,14 @@
+# Compiled output
+ex00/ex00
+ex01/ex01
+ex02/ex02
+ex03/ex03
+
+# Object files
+*.o
+
+# Dependency files
+*.d
+
+# DS_Store (mac)
+.DS_Store
