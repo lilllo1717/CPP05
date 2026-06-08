@@ -1,5 +1,5 @@
-#ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
+#ifndef FORM_HPP
+#define FORM_HPP
 
 #include <stdio.h>
 #include <iostream>
@@ -15,22 +15,26 @@
 #include <charconv>
 #include <ostream>
 
+
 #define RED     "\033[31m"
 #define GREEN    "\033[32m"
 #define PURPLE  "\033[35m"
 #define RESET   "\033[0m"
 
+class Bureaucrat;
 
-class Bureaucrat
+class Form
 {
     private:
         const std::string _name;
-        int _grade;
+        bool _signed;
+        const int _gradeNeededToSign;
+        const int _gradeNeededToExecute;
 
     public:
-        Bureaucrat();
-        Bureaucrat(const std::string& name, int grade);
-        ~Bureaucrat();
+        Form();
+        Form(const std::string& name, bool sign, const int gradeToSign, const int gradeToExecute);
+        ~Form();
 
         class GradeTooHighException : public std::exception
         {
@@ -61,32 +65,30 @@ class Bureaucrat
                     return _message.c_str();
                 }
         };
+        class GradeTooLowToSignException : public std::exception
+        {
+            private:
+                std::string _message;
+            public:
+                GradeTooLowToSignException(int grade, int required)
+                {
+                    _message = "Grade " + std::to_string(grade) + " is too low. Min required grade is " + std::to_string(required) + "\n";
+                }
+                const char* what() const noexcept
+                {
+                    return _message.c_str();
+                }
+        };
 
-        // class GradeValueInvalidException : public std::exception
-        // {
-        //     private:
-        //         std::string _message;
-        //     public:
-        //         GradeValueInvalidException(const std::string& name)
-        //         {
-        //             _message = "Invalid input for grade. Has to be a number between 1 and 150.\n";
-        //         }
-        //         const char* what() const noexcept
-        //         {
-        //             return _message.c_str();
-        //         }
-        // };
+        const std::string& getName() const;
+        bool getSignedStatus() const;
+        int getGradeNeededToSign() const;
+        int getGradeNeededToExecute() const;
 
-        const std::string getName() const;
-        int getGrade() const;
-
-        void incrementGrade();
-        void decrementGrade();
-
+        void beSigned(Bureaucrat& bureaucrat);
 
 };
 
-std::ostream& operator<<(std::ostream& os, const Bureaucrat& b);
-
+std::ostream& operator<<(std::ostream& os, const Form& form);
 
 #endif

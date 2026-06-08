@@ -1,0 +1,15 @@
+#ifndef TESTS_HPP
+#define TESTS_HPP
+
+#include "Bureaucrat.hpp"
+
+void test(const std::string& description, void (*testFunc)());
+void testValid();
+void testGradeTooHigh();
+void testGradeTooLow();
+void testInvalidIncrement();
+void testInvalidDecrement();
+void testValidIncrement();
+void testValidDecrement();
+
+#endif

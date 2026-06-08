@@ -1,22 +1,15 @@
 #include "Bureaucrat.hpp"
-
+#include "tests.hpp"
 
 int main(void)
 {
-    try
-    {
-        Bureaucrat bur1("Mark", 120);
-        std::cout << bur1;
-        Bureaucrat bur2("Mark", 160);
-        std::cout << bur2;
+    test("Valid tests", testValid);
+    test("Valid increment", testValidIncrement);
+    test("Valid decrement", testValidDecrement);
+    test("Grade too high", testGradeTooHigh);
+    test("Grade too low", testGradeTooLow);
+    test("Invalid increment", testInvalidIncrement);
+    test("Invalid decrement", testInvalidDecrement);
 
-    }
-    catch (Bureaucrat::GradeTooLowException& e)
-    {
-        std::cout << RED <<  e.what() << RESET << "\n";
-    }
-    catch (Bureaucrat::GradeTooHighException& e)
-    {
-        std::cout << RED <<  e.what() << RESET << "\n";
-    }
+    return 0;
 }

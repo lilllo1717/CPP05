@@ -14,6 +14,7 @@
 #include <algorithm>
 #include <charconv>
 #include <ostream>
+#include "Form.hpp"
 
 #define RED     "\033[31m"
 #define GREEN    "\033[32m"
@@ -62,26 +63,13 @@ class Bureaucrat
                 }
         };
 
-        // class GradeValueInvalidException : public std::exception
-        // {
-        //     private:
-        //         std::string _message;
-        //     public:
-        //         GradeValueInvalidException(const std::string& name)
-        //         {
-        //             _message = "Invalid input for grade. Has to be a number between 1 and 150.\n";
-        //         }
-        //         const char* what() const noexcept
-        //         {
-        //             return _message.c_str();
-        //         }
-        // };
-
         const std::string getName() const;
         int getGrade() const;
 
         void incrementGrade();
         void decrementGrade();
+
+        void signForm(Form& form);
 
 
 };
