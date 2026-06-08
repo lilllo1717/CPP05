@@ -103,15 +103,16 @@ void testInvalidDecrement()
         Bureaucrat bur1("Mark", 80);
         std::cout << bur1;
         Form form("Form 1", false, 80, 10);
-        form.beSigned(bur1);
+        bur1.signForm(form);
         std::cout << form;
 
         std::cout << PURPLE << "Trying to sign after decrementing:\n" << RESET ;
+        Form form2("Form 2", false, 80, 10);
         bur1.decrementGrade();
         bur1.decrementGrade();
-        form.beSigned(bur1);
+        bur1.signForm(form2);
         std::cout << bur1;
-        std::cout << form;
+        std::cout << form2;
 
     }
     catch(const std::exception& e)
